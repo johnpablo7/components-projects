@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import User from "@/app/models/user";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/app/libs/mongodb";
+import { EMAIL_ALREADY_EXISTS } from "@/constants/error-codes";
 
 export async function POST(request: Request) {
   // const body = await request.json();
@@ -10,7 +11,7 @@ export async function POST(request: Request) {
   const { email, password, fullname } = await request.json();
   console.log(email, password, fullname);
 
-  if (!password || password.lemgth < 6)
+  if (!password || password.length < 6)
     return NextResponse.json(
       {
         message: "Password must be at least 6 characters",
@@ -28,7 +29,8 @@ export async function POST(request: Request) {
     if (userFound)
       return NextResponse.json(
         {
-          message: "Email already exists",
+          code: EMAIL_ALREADY_EXISTS,
+          message: "Correo ya existe",
         },
         {
           status: 409,
@@ -41,7 +43,11 @@ export async function POST(request: Request) {
     console.log(savedUser);
 
     // return NextResponse.json({ message: "signup" });
-    return NextResponse.json(savedUser);
+    return NextResponse.json({
+      _id: savedUser._id,
+      email: savedUser.email,
+      fullname: savedUser.fullname,
+    });
   } catch (error) {
     console.log(error);
     // return NextResponse.error();
