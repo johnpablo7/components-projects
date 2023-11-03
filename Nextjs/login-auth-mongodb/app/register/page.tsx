@@ -47,7 +47,7 @@ export default function RegisterPage() {
         redirect: false,
       });
 
-      if (res?.ok) return router.push("/dashboard");
+      if (res?.ok) return router.push("/dashboard/profile");
 
       console.log(res);
     } catch (error) {
@@ -66,7 +66,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="bg-indigo-50 min-h-screen flex flex-col items-center justify-center p-4">
+    <div className="bg-indigo-50 h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-4">
       <div className="max-w-lg bg-white w-full p-4 rounded-md">
         <FormProvider {...methods}>
           <form

@@ -40,11 +40,12 @@ export default function LoginPage() {
 
     // if (res?.error) return setError(res.error as string);
     if (res?.ok) return router.push("/dashboard/profile");
+    router.refresh();
     console.log(res);
   };
 
   return (
-    <div className="bg-indigo-50 min-h-screen flex flex-col items-center justify-center p-4">
+    <div className="bg-indigo-50 h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-4">
       <div className="max-w-lg bg-white w-full p-4 rounded-md">
         <FormProvider {...methods}>
           <form
