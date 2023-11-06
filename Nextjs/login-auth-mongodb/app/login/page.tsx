@@ -95,7 +95,11 @@ export default function LoginPage() {
 
             <button
               onClick={() =>
-                toast.success("¡Acceso Exitoso!", { theme: "dark" })
+                toast.success("¡Acceso Exitoso!", {
+                  position: "top-center",
+                  theme: "light",
+                  autoClose: 1200,
+                })
               }
               className="border rounded-md py-1 mt-6"
               type="submit"

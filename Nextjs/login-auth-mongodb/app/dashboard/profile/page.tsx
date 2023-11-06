@@ -14,14 +14,15 @@ export default function ProfilePage() {
           {JSON.stringify({ session, status }, null, 2)}
         </pre>
       </div>
-      <button
+
+      {/* <button
         onClick={() => {
           signOut();
         }}
         className="px-16 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors"
       >
         Salir
-      </button>
+      </button> */}
     </div>
   );
 }
