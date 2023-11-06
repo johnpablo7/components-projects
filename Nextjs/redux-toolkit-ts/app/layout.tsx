@@ -1,5 +1,4 @@
 import { Providers } from "@/redux/providers";
-
 import type { Metadata } from "next";
 import "./globals.css";
 
