@@ -1,7 +1,9 @@
+import { IUser } from "@/types/user";
+import { toBase64 } from "@/utils/toBase64";
 import { FormProvider, useForm } from "react-hook-form";
 
 export const Demo1 = () => {
-  const methods = useForm({
+  const methods = useForm<IUser>({
     defaultValues: {
       // email: "@example.com",
     },
@@ -18,16 +20,14 @@ export const Demo1 = () => {
 
   console.log(errors);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: IUser) => {
     // console.log(data.image);
-
     console.log(data);
 
     alert("Enviando datos...");
     // setValue("email" , '')
 
     reset();
-
     // antes de enviar
     // fetch o axios
   };
@@ -182,10 +182,19 @@ export const Demo1 = () => {
             <label htmlFor="image">Imagen</label>
             <input
               type="file"
-              onChange={(e) => {
-                // console.log(e.target.files[0]);
-                setValue("image", e.target.files[0].name);
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const base64 = await toBase64(file);
+                  setValue("image", base64);
+                } else {
+                  setValue("image", "");
+                }
               }}
+              // onChange={(e) => {
+              //   // console.log(e.target.files[0]);
+              //   setValue("image", e.target.files[0].name);
+              // }}
             />
 
             {/* Terminos y condiciones */}
